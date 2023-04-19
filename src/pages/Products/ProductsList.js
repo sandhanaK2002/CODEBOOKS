@@ -1,20 +1,26 @@
-import { useState , useEffect } from "react";
-import { ProductCard } from "../../components/Elements/ProductCard";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { ProductCard } from "../../components";
 import { FilterBar } from "./components/FilterBar";
+import {useTitle} from "../../Hooks/useTitle";
 
 export const ProductsList = () => {
   const [show, setShow] = useState(false);
-  const [products , setProducts] = useState([])
+  const [products, setProducts] = useState([]);
+  const search = useLocation().search;
+  const searchTerm = new URLSearchParams(search).get("q");
+  useTitle("Explore E-books Collections")
+  
 
-  useEffect(()=>{
-    async function fetchproducts(){
-        const response = await fetch("http://localhost:8000/products")
-        const data = await response.json()
-        setProducts(data)
+
+  useEffect(() => {
+    async function fetchProducts(){
+      const response = await fetch(`http://localhost:8000/products?name_like=${searchTerm ? searchTerm : ""}`);
+      const data = await response.json()
+      setProducts(data);
     }
-    fetchproducts()
-  },[])
-
+    fetchProducts();
+  }, [searchTerm]);
 
   return (
     <main>
@@ -29,8 +35,9 @@ export const ProductsList = () => {
           </div>    
 
           <div className="flex flex-wrap justify-center lg:flex-row">
-            {products.map((product)=> 
-              (<ProductCard key={product.id} product={product} />))}
+            { products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            )) }            
           </div>  
         </section>
 
