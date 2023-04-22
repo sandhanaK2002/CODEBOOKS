@@ -12,11 +12,9 @@ export const FeaturedProducts = () => {
           const response  = await fetch("http://localhost:8000/featured_products")
           const data = await response.json()
           setProducts(data)
-          console.log(data)
     }
     fetchProducts()
   },[])
-
 
 
   return (

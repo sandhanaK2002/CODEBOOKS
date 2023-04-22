@@ -1,32 +1,27 @@
-export const filterReducer = (state , action) => {
-
-const {type , payload} = action;
-
+export const filterReducer = (state, action) => {
+    const {type, payload} = action;
 
     switch(type){
 
-        case "PRODUCT_LIST" : 
-        return {productList : payload.products}
-
+        case "PRODUCT_LIST":
+            return { productList: payload.products }
+        
         case "SORT_BY":
-           return 
-           
+            return {...state, sortBy: payload.sortBy}
+        
         case "RATINGS":
-            return 
-            
+            return {...state, ratings: payload.ratings}
+        
         case "BEST_SELLER_ONLY":
-            return 
+            return {...state, bestSellerOnly: payload.bestSellerOnly}
+        
+        case "ONLY_IN_STOCK":
+            return {...state, onlyInStock: payload.onlyInStock}
 
-        case "ONLY IN STOCK" :
+        case "CLEAR_FILTER":
             return
-
-        case "CLEAR FILTER":
-            return
-
-        default :
-            throw new Error("No case Found")                
+        
+        default:
+            throw new Error("No Cae Found!");
     }
-
-
-
-}
+} 
