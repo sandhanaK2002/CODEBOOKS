@@ -9,6 +9,9 @@ export const Header = () => {
   const [searchSection, setSearchSection] = useState(false);
   const [show , setShow] = useState(false)
 
+  const token = JSON.parse(sessionStorage.getItem("token"))
+
+
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     
@@ -36,7 +39,7 @@ export const Header = () => {
                     </span>                    
                   </Link>
                   <span onClick = {()=> setShow(!show)} className="bi bi-person-circle cursor-pointer text-2xl text-gray-700 dark:text-white"></span>
-                  {show && <DropdownLoggedOut/>}
+                  {show && (token ? <DropdownLoggedIn/> : <DropdownLoggedOut/>)}
               </div>
           </div>
       </nav>
