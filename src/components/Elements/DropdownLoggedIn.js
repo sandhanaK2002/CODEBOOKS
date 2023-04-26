@@ -1,12 +1,13 @@
 import {Link , useNavigate} from "react-router-dom"
 
-export const DropdownLoggedIn = () => {
+export const DropdownLoggedIn = ({setShow}) => {
 
     const navigate = useNavigate()
 
     const handleLoggedOut =()=>{
         sessionStorage.removeItem("token")
         sessionStorage.removeItem("cbid")
+        setShow(false)
         navigate("/")
     }
 
@@ -19,14 +20,14 @@ export const DropdownLoggedIn = () => {
 
         <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
             <li>
-                <Link to="/" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All eBooks</Link>
+                <Link onClick = {()=>setShow(false)} to="/" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All eBooks</Link>
             </li>
             <li>
-                <Link to="" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
+                <Link onClick = {()=>setShow(false)} to="" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
             </li>
         </ul>
         <div className="py-1">
-            <span  onClick = {handleLoggedOut} className="cursor-pointer block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</span>
+            <span onClick = {handleLoggedOut} className="cursor-pointer block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</span>
         </div>
     </div>
   )
