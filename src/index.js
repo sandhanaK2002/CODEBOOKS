@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {ScrollToTop} from "./components"
-import {FilterProvider} from "./context"
+import {FilterProvider , CartProvider} from "./context"
 import App from './App';
 import './index.css';
 
@@ -13,11 +13,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
+    <CartProvider>
     <FilterProvider>
       <ScrollToTop/>
-      <ToastContainer position="top-right" autoClose={5000}/>
+      <ToastContainer position="top-right" autoClose={3000}/>
         <App />
-    </FilterProvider>  
+    </FilterProvider>
+    </CartProvider>  
     </Router>
   </React.StrictMode>
 );
