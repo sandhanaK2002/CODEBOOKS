@@ -292,6 +292,12 @@
       "password": "$2a$10$oIJyL1VA1AJUY0Vd61FiqOcStAHb3Td0d5RE.HllQZdl0vdMxxUKO",
       "name": "kanmani sandhana",
       "id": 9
+    },
+    {
+      "email": "sandykanmani@gmail.com",
+      "password": "$2a$10$QmyMKO0BjuS9ZfBcdxYUc.xr9o9AE3DGBkZfuWlow76qFPSukc/NC",
+      "name": "sandhana",
+      "id": 10
     }
   ]
 }
