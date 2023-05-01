@@ -38,5 +38,5 @@ export const register  = async (authDetail)=>{
 
 export function logout(){
   sessionStorage.removeItem("token");
-  sessionStorage.removeItem("cbid");
+  sessionStorage.removeItem("cbid"); 
 }
