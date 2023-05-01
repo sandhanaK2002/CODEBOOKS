@@ -1,13 +1,20 @@
-export async function getUser(){
+function getSession(){
     const token = JSON.parse(sessionStorage.getItem("token"));
-    const cbid = JSON.parse(sessionStorage.getItem("cbid"));    
+    const cbid = JSON.parse(sessionStorage.getItem("cbid")); 
+    return {token , cbid}
+}
+
+
+
+export async function getUser(){
+       const browserData = getSession()
 
     const requestOptions = {
         method: "GET",
-        headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}`}
+        headers: {"Content-Type": "application/json", Authorization: `Bearer ${browserData.token}`}
     }
 
-    const response =  await fetch(`http://localhost:8000/600/users/${cbid}`, requestOptions)
+    const response =  await fetch(`http://localhost:8000/600/users/${browserData.cbid}`, requestOptions)
     const data = await response.json();
     return data 
 
@@ -16,12 +23,11 @@ export async function getUser(){
 
 export async function getUserOrder(){
 
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const cbid = JSON.parse(sessionStorage.getItem("cbid")); 
+   const browserData =  getSession()
 
-    const response = await fetch(`http://localhost:8000/660/orders?user.id=${cbid}` , {
+    const response = await fetch(`http://localhost:8000/660/orders?user.id=${browserData.cbid}` , {
       method : "GET" , 
-      headers : {"Content-Type" : "application/json" , Authorization : `Bearer ${token}`}
+      headers : {"Content-Type" : "application/json" , Authorization : `Bearer ${browserData.token}`}
       
       });
 
@@ -33,8 +39,7 @@ export async function getUserOrder(){
 
 export async function createOrder(cartList , total , user){
 
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const cbid = JSON.parse(sessionStorage.getItem("cbid"));   
+   const browserData = getSession()
 
 
     const order = {
@@ -50,7 +55,7 @@ export async function createOrder(cartList , total , user){
 
     const response = await fetch("http://localhost:8000/660/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${browserData.token}` },
         body: JSON.stringify(order)
     });
     const data = await response.json();
