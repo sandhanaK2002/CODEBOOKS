@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import { Search } from "../Sections/Search";
-import {DropdownLoggedIn , DropdownLoggedOut} from "../index"
-import {useCart} from "../../context"
+import { DropdownLoggedOut, DropdownLoggedIn } from "../index";
+import { useCart } from "../../context";
 
 export const Header = () => {
+  const { cartList } = useCart();
   const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
   const [searchSection, setSearchSection] = useState(false);
-  const [show , setShow] = useState(false)
-  const {cartList} = useCart()
-
-  const token = JSON.parse(sessionStorage.getItem("token"))
-
+  const [dropdown, setDropdown] = useState(false);
+  const token = JSON.parse(sessionStorage.getItem("token"));
 
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
@@ -40,12 +38,13 @@ export const Header = () => {
                       <span className="text-white text-sm absolute -top-1 left-2.5 bg-rose-500 px-1 rounded-full ">{cartList.length}</span>
                     </span>                    
                   </Link>
-                  <span onClick = {()=> setShow(!show)} className="bi bi-person-circle cursor-pointer text-2xl text-gray-700 dark:text-white"></span>
-                  {show && (token ? <DropdownLoggedIn setShow = {setShow} /> : <DropdownLoggedOut setShow = {setShow}/>)}
+                  <span onClick={() => setDropdown(!dropdown)} className="bi bi-person-circle cursor-pointer text-2xl text-gray-700 dark:text-white"></span>
+                  { dropdown && ( token ? <DropdownLoggedIn setDropdown={setDropdown} /> : <DropdownLoggedOut setDropdown={setDropdown} /> ) }
               </div>
           </div>
       </nav>
       { searchSection && <Search setSearchSection={setSearchSection} /> }
+      
     </header>
   )
-} 
+}

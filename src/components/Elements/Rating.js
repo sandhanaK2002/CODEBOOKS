@@ -16,6 +16,3 @@ export const Rating = ({rating}) => {
     </>
   )
 }
-
-
-
