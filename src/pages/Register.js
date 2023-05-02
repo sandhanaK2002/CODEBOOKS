@@ -1,12 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import {useTitle} from "../hooks/useTitle"
 import {register} from "../services"
 
 export const Register = () => {
   const navigate = useNavigate();
+  useTitle("Register")
 
   async function handleRegister(event){
     event.preventDefault();
+    try{
     const authDetail = {
       name: event.target.name.value,
       email: event.target.email.value,
@@ -14,6 +17,14 @@ export const Register = () => {
     }
     const data  =  await register(authDetail) 
     data.accessToken ? navigate("/products") : toast.error(data);
+    }catch(error){
+      toast.error(error.message , {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        theme: "colored"
+    })
+    }
   }
 
   return (

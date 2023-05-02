@@ -1,21 +1,34 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import {useTitle} from "../hooks/useTitle"
 import {login} from '../services'
 
 export const Login = () => {
+  useTitle("Login")
   const navigate = useNavigate();
   const email = useRef();
   const password = useRef();
+ 
 
   async function handleLogin(event){
     event.preventDefault();
+    try{
     const authDetail = {
       email: email.current.value,
       password: password.current.value
     }
     const data = await login(authDetail)
     data.accessToken ? navigate("/products") : toast.error(data);
+    }catch(error){
+      toast.error(error.message , {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        theme: "colored"
+    })
+    }
+  
   }
 
   return (

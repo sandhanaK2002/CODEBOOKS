@@ -6,7 +6,7 @@ import {getUser} from "../../services"
 export const DropdownLoggedIn = ({setDropdown}) => {
     const navigate = useNavigate();
     const [user , setUser] = useState({})
-
+    
     useEffect(()=>{
         async function fetchUser(){
             const data = await  getUser()
@@ -19,7 +19,7 @@ export const DropdownLoggedIn = ({setDropdown}) => {
     function handleLogout(){
         logout()
         setDropdown(false);
-        navigate("/");
+        navigate("/login");
     }
 
   return (
