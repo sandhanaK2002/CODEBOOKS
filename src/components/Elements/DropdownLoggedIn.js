@@ -14,7 +14,7 @@ export const DropdownLoggedIn = ({setDropdown}) => {
             data.email ? setUser(data) : logout() 
         }
         fetchUser()
-    },[])
+    },[]) //eslint-disable-line
 
     function handleLogout(){
         logout()
