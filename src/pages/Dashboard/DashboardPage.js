@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useTitle } from "../../hooks/useTitle";
+import { TitleChange } from "../../hooks/TitleChange";
 import { getUserOrders } from "../../services";
 import { DashboardCard } from "./components/DashboardCard";
 import { DashboardEmpty } from "./components/DashboardEmpty";
 
 export const DashboardPage = () => {
   const [orders, setOrders] = useState([]);
-  useTitle("Dashboard");
+  TitleChange("Dashboard");
 
   useEffect(() => {
     async function fetchOrders(){

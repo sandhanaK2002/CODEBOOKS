@@ -1,11 +1,11 @@
-import { useTitle } from "../../hooks/TitleChange";
+import { TitleChange } from "../../hooks/TitleChange";
 import { CartEmpty } from "./components/CartEmpty";
 import { CartList } from "./components/CartList";
 import { useCart } from "../../context"
 
 export const CartPage = () => {
   const { cartList } = useCart();
-  useTitle(`Cart (${cartList.length})`);
+  TitleChange(`Cart (${cartList.length})`);
 
   return (
     <main>       

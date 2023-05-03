@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { useTitle } from "../hooks/useTitle";
+import { TitleChange } from "../hooks/TitleChange";
 import Logo from "../assets/logo.png";
 
 export const PageNotFound = () => {
-    useTitle("Page Not Found");
+    TitleChange("Page Not Found");
     
   return (
     <main>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
-import { useTitle } from "../hooks/useTitle";
+import { TitleChange } from "../hooks/TitleChange";
 import { Rating } from "../components";
 import { useCart } from "../context";
 import { getProduct } from "../services";
@@ -11,7 +11,7 @@ export const ProductDetail = () => {
   const [inCart, setInCart] = useState(false);
   const [product, setProduct] = useState({});
   const { id } = useParams();
-  useTitle(product.name);
+  TitleChange(product.name);
   
   useEffect(() => {
     async function fetchProducts(){

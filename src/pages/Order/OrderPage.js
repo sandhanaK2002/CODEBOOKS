@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
-import { useTitle } from "../../hooks/useTitle";
+import { TitleChange } from "../../hooks/TitleChange";
 import { OrderSuccess } from "./components/OrderSuccess";
 import { OrderFail } from "./components/OrderFail";
 
 export const OrderPage = () => {
-  useTitle("Order Summary");
+  TitleChange("Order Summary");
   const { state } = useLocation();
 
   return (
