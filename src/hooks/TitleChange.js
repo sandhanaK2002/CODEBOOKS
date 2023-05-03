@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useTitle = (title) => {
+export const TitleChange = (title) => {
 
     useEffect(() => {
         document.title = `${title} - CodeBook`;
