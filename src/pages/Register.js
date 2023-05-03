@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { TitleChange } from "../hooks/TitleChange";
-import { register } from '../services';
 import { toast } from 'react-toastify';
+import { register } from '../services';
+
 
 export const Register = () => {
   TitleChange("Register");
