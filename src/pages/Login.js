@@ -29,8 +29,8 @@ export const Login = () => {
 
     try{
     const authDetail = {
-    email : "kanmani@example.com",
-    password : "123456789"
+    email : process.env.REACT_APP_GUEST_LOGIN,
+    password : process.env.REACT_APP_GUEST_PASSWORD
   }
     const data = await login(authDetail);
     data.accessToken ? navigate("/products") : toast.error(data);
