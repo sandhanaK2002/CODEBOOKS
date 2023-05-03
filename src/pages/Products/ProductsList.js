@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTitle } from "../../hooks/useTitle";
-import { useFilter } from "../../context";
+
 import { ProductCard } from "../../components";
-import {getProductList} from "../../services"
 import { FilterBar } from "./components/FilterBar";
+
+import { useFilter } from "../../context";
+import { getProductList } from "../../services";
 import { toast } from "react-toastify";
 
 export const ProductsList = () => {
@@ -14,29 +16,17 @@ export const ProductsList = () => {
   const searchTerm = new URLSearchParams(search).get("q");
   useTitle("Explore eBooks Collection");
  
-
   useEffect(() => {
-    
-      async function fetchProducts(){
-      
+    async function fetchProducts(){
       try{
-        const data = await getProductList(searchTerm) 
+        const data = await getProductList(searchTerm);
         initialProductList(data);
-      }catch(error){
-          toast.error(error.message , {
-            position: "bottom-center",
-            autoClose: 3000,
-            closeOnClick: true,
-            theme: "colored"
-          })
+      } catch(error){
+        toast.error(error.message, {closeButton: true, position: "bottom-center" });
       }
-      
-
     }
     fetchProducts();
-      
-  }, [searchTerm]) //eslint-disable-line
-
+  }, [searchTerm]);   //eslint-disable-next-line:
 
   return (
     <main>

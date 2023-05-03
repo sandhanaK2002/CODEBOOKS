@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import { useTitle } from "../hooks/useTitle";
 import { Rating } from "../components";
-import {getProduct} from "../services"
 import { useCart } from "../context";
+import { getProduct } from "../services";
 import { toast } from "react-toastify";
 
 export const ProductDetail = () => {
@@ -16,16 +16,11 @@ export const ProductDetail = () => {
   useEffect(() => {
     async function fetchProducts(){
       try{
-          const data = await  getProduct(id)
-          setProduct(data);
-      }catch(error){
-          toast.error(error.message , {
-              position: "bottom-center",
-              autoClose: 3000,
-              closeOnClick: true,
-              theme: "dark"
-          })
-      }
+        const data = await getProduct(id);
+        setProduct(data);
+      } catch(error){
+        toast.error(error.message, {closeButton: true, position: "bottom-center" });
+      }      
     }
     fetchProducts();
   }, [id]);

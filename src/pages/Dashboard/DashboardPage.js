@@ -1,33 +1,25 @@
-import { useEffect , useState } from "react"
-import {DashboardCard} from "./components/DashboardCard"
-import {DashboardEmpty} from "./components/DashboardEmpty"
-import { useTitle } from "../../hooks/useTitle"
-import {getUserOrder} from "../../services"
-import { toast } from "react-toastify"
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useTitle } from "../../hooks/useTitle";
+import { getUserOrders } from "../../services";
+import { DashboardCard } from "./components/DashboardCard";
+import { DashboardEmpty } from "./components/DashboardEmpty";
 
 export const DashboardPage = () => {
-  const [orders , setOrders] = useState([])
-  useTitle("Dashboard")
+  const [orders, setOrders] = useState([]);
+  useTitle("Dashboard");
 
-  useEffect(()=>{
-      async function fetchOrders(){
-
-      try{  
-      const data = await getUserOrder()   
-      setOrders(data)
-      }catch(error){
-        toast.error(error.message , {
-            position: "bottom-center",
-            autoClose: 3000,
-            closeOnClick: true,
-            theme: "colored"
-        })
-      }  
-    
-    }    
-      fetchOrders()
-    },[])
-
+  useEffect(() => {
+    async function fetchOrders(){
+      try{
+        const data = await getUserOrders();
+        setOrders(data);
+      } catch(error){
+        toast.error(error.message, { closeButton: true, position: "bottom-center" });
+      }      
+    }
+    fetchOrders();
+  }, []);
 
   return (
     <main>
@@ -36,13 +28,13 @@ export const DashboardPage = () => {
       </section>
 
       <section>
-        {orders.length && orders.map((order)=>(
-          <DashboardCard key = {order.id} order={order} />
-        ))}
+        { orders.length && orders.map((order) => (
+          <DashboardCard key={order.id} order={order} />
+        )) }
       </section>
 
       <section>
-        {!orders.length && <DashboardEmpty/>}
+        { !orders.length && <DashboardEmpty /> }
       </section>
 
     </main>
